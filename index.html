@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Velaro — Descubre tu estilo. +60 marcas, más de 40.000 prendas. Desliza, encuentra, compra.">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" type="image/png" href="./images/logo.png">
+<link rel="apple-touch-icon" href="./images/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Velaro — Descubre tu estilo">
+<meta property="og:description" content="+60 marcas. 40.000 prendas. Desliza y encuentra la tuya.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./images/hero.png">
+
+<title>Velaro — Descubre tu estilo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================
+   VELARO — Landing editorial
+   ============================================ */
+
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f5f3ef;
+  --ink: #0a0a0a;
+  --ink-soft: #2a2a28;
+  --muted: #8a8680;
+  --line: #e8e6e0;
+  --accent: #1a1a1a;
+
+  --serif: 'Playfair Display', 'Times New Roman', serif;
+  --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --container: 1440px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================
+   NAV
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem var(--gutter);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease, padding 0.4s ease;
+}
+.nav.scrolled { border-bottom-color: var(--line); padding: 0.8rem var(--gutter); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-logo img {
+  width: 28px; height: 28px;
+  object-fit: contain;
+}
+.nav-logo-text {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.nav-links a { position: relative; padding: 0.25rem 0; transition: opacity 0.3s; }
+.nav-links a:hover { opacity: 0.5; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--ink);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.3rem;
+  background: var(--ink);
+  color: var(--bg);
+  transition: opacity 0.3s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta { padding: 0.55rem 1rem; font-size: 0.65rem; }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  padding: 6rem var(--gutter) 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  max-width: var(--container);
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding-top: 2rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 2.5rem; height: 1px;
+  background: var(--ink);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+}
+.hero-title .italic { font-style: italic; }
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+}
+.hero-title .line > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.hero-title .line:nth-child(1) > span { animation-delay: 0.3s; }
+.hero-title .line:nth-child(2) > span { animation-delay: 0.45s; }
+.hero-title .line:nth-child(3) > span { animation-delay: 0.6s; }
+
+.hero-lead {
+  max-width: 26rem;
+  font-size: 1.02rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.85s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1.05s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.05rem 2rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.73rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: background 0.3s, transform 0.3s;
+}
+.btn-primary:hover { background: #1f1f1d; transform: translateY(-2px); }
+.btn-primary svg { transition: transform 0.3s; }
+.btn-primary:hover svg { transform: translateX(4px); }
+
+.btn-ghost {
+  font-size: 0.73rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ink);
+  transition: padding 0.3s;
+}
+.btn-ghost:hover { padding-right: 0.8rem; }
+
+.hero-visual {
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 0.4s forwards;
+}
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  max-height: 88vh;
+  object-fit: contain;
+  object-position: center;
+}
+
+.hero-stats {
+  margin-top: 3.5rem;
+  display: flex;
+  gap: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1.2s forwards;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-num .italic { font-style: italic; }
+.stat-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 5.5rem;
+    min-height: auto;
+  }
+  .hero-visual { order: -1; }
+  .hero-visual img { max-height: 70vh; }
+  .hero-stats { margin-top: 2.5rem; gap: 2rem; }
+  .hero-text { padding-top: 0; }
+}
+
+/* ============================================
+   STRAP — banda oscura con cifras
+   ============================================ */
+.strap {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 4rem var(--gutter);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.strap-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.strap-item { flex: 1; min-width: 220px; }
+.strap-num {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.strap-num .italic { font-style: italic; color: #c9b89c; }
+.strap-label {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.strap-divider {
+  width: 1px;
+  height: 3.5rem;
+  background: rgba(255,255,255,0.15);
+}
+@media (max-width: 768px) {
+  .strap-divider { display: none; }
+  .strap { padding: 3rem var(--gutter); }
+}
+
+/* ============================================
+   MARQUEE
+   ============================================ */
+.marquee {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 1.3rem 0;
+  background: var(--bg);
+}
+.marquee-track {
+  display: flex;
+  gap: 3.5rem;
+  animation: scroll 45s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.marquee-item {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+.marquee-item:nth-child(even) { font-style: italic; }
+.marquee-dot {
+  align-self: center;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* ============================================
+   FEATURES
+   ============================================ */
+.features {
+  padding: 7rem var(--gutter) 5rem;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.section-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 5rem;
+}
+.section-label .right { font-family: var(--serif); font-style: italic; color: var(--ink); text-transform: none; letter-spacing: 0.02em; font-size: 0.95rem; }
+
+.feature {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.feature.visible { opacity: 1; transform: translateY(0); }
+.feature:last-child { border-bottom: none; }
+
+.feature-number {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 9vw, 7rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.feature-number .sep { font-style: italic; color: var(--muted); }
+
+.feature-content h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.8vw, 3rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+.feature-content h3 em { font-style: italic; }
+
+.feature-content p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 32rem;
+  font-weight: 300;
+}
+
+.feature-tag {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--ink);
+}
+
+.feature-visual {
+  background: var(--bg-soft);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+}
+.feature-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.8s ease;
+}
+.feature:hover .feature-visual img { transform: scale(1.02); }
+
+.feature.reverse { direction: rtl; }
+.feature.reverse > * { direction: ltr; }
+
+@media (max-width: 900px) {
+  .feature {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 3.5rem 0;
+  }
+  .feature.reverse { direction: ltr; }
+  .feature-number { font-size: 3.5rem; }
+  .feature-visual { aspect-ratio: 4/5; max-width: 100%; }
+}
+
+/* ============================================
+   PULLQUOTE
+   ============================================ */
+.pullquote {
+  padding: 7rem var(--gutter);
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pullquote blockquote {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 4.8vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.pullquote blockquote em { font-style: italic; }
+.pullquote cite {
+  display: block;
+  margin-top: 2.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-style: normal;
+}
+
+/* ============================================
+   CTA FINAL
+   ============================================ */
+.cta {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8rem var(--gutter);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: 'VELARO';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--serif);
+  font-size: clamp(9rem, 28vw, 26rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.cta-inner { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+
+.cta-logo {
+  width: 48px; height: 48px;
+  margin: 0 auto 2rem;
+  filter: invert(1);
+  opacity: 0.9;
+}
+
+.cta-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 1.5rem;
+}
+
+.cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.3rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+}
+.cta h2 em { font-style: italic; color: #d4c5a9; }
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 2.4rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+  border: 1px solid var(--bg);
+}
+.cta-btn:hover { background: transparent; color: var(--bg); transform: translateY(-3px); }
+
+.cta-note {
+  margin-top: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--bg);
+  padding: 3rem var(--gutter) 2rem;
+  border-top: 1px solid var(--line);
+}
+.footer-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.footer-logo img { width: 22px; height: 22px; object-fit: contain; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a:hover { color: var(--ink); }
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes rise {
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="./images/logo.png" alt="Velaro">
+    <span class="nav-logo-text">Velaro</span>
+  </a>
+  <div class="nav-links">
+    <a href="#concepto">Concepto</a>
+    <a href="#manifiesto">Manifiesto</a>
+    <a href="#descargar">Descargar</a>
+  </div>
+  <a href="https://play.google.com/store/apps/details?id=com.velaro.app&hl=es" class="nav-cta" target="_blank" rel="noopener">Descargar</a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Edición No. 01 · Primavera 2026</div>
+    <h1 class="hero-title">
+      <span class="line"><span>Descubre</span></span>
+      <span class="line"><span class="italic">tu</span></span>
+      <span class="line"><span>estilo.</span></span>
+    </h1>
+    <p class="hero-lead">
+      Más de 60 marcas y 40.000 prendas al alcance de un gesto. Desliza, guarda lo que te conquista, y llévate a casa solo lo que te representa.
+    </p>
+    <div class="hero-actions">
+      <a href="https://play.google.com/store/apps/details?id=com.velaro.app&hl=es" class="btn-primary" target="_blank" rel="noopener">
+        <span>Descargar en Google Play</span>
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
+      </a>
+      <a href="#concepto" class="btn-ghost">Ver más</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">60<span class="italic">+</span></span>
+        <span class="stat-label">Marcas</span>
+      </div>
+      <div>
+        <span class="stat-num">40<span class="italic">K</span></span>
+        <span class="stat-label">Prendas</span>
+      </div>
+      <div>
+        <span class="stat-num"><span class="italic">∞</span></span>
+        <span class="stat-label">Estilos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="./images/hero.png" alt="Velaro — Descubre tu estilo" loading="eager">
+  </div>
+</section>
+
+<!-- ==================== STRAP ==================== -->
+<section class="strap">
+  <div class="strap-inner">
+    <div class="strap-item">
+      <div class="strap-num">+<span class="italic">60</span></div>
+      <span class="strap-label">Marcas curadas</span>
+    </div>
+    <div class="strap-divider"></div>
+    <div class="strap-item">
+      <div class="strap-num"><span class="italic">40.000</span></div>
+      <span class="strap-label">Prendas vivas</span>
+    </div>
+    <div class="strap-divider"></div>
+    <div class="strap-item">
+      <div class="strap-num"><span class="italic">1</span> gesto</div>
+      <span class="strap-label">Para encontrarlas</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MARQUEE ==================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">El Ganso</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Silbon</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Emidio Tucci</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Scalpers</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Mango</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Massimo Dutti</span><span class="marquee-dot"></span>
+    <span class="marquee-item">COS</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Ysabel Mora</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Arket</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Pompeii</span><span class="marquee-dot"></span>
+    <!-- duplicado para loop -->
+    <span class="marquee-item">El Ganso</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Silbon</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Emidio Tucci</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Scalpers</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Mango</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Massimo Dutti</span><span class="marquee-dot"></span>
+    <span class="marquee-item">COS</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Ysabel Mora</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Arket</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Pompeii</span><span class="marquee-dot"></span>
+  </div>
+</div>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="features" id="concepto">
+  <div class="section-label">
+    <span>El concepto</span>
+    <span class="right"><em>Índice</em></span>
+  </div>
+
+  <!-- Feature 01 — SWIPE -->
+  <article class="feature">
+    <div class="feature-number">01<span class="sep">.</span></div>
+    <div class="feature-content">
+      <h3>Desliza y <em>explora</em>.</h3>
+      <p>
+        Elige una categoría y deja que el gesto hable. Un swipe a la derecha si te gusta, a la izquierda si no. Tu feed aprende, refina y propone — moda que se adapta a ti, no al revés.
+      </p>
+      <span class="feature-tag">Swipe · Descubrimiento</span>
+    </div>
+    <div class="feature-visual">
+      <img src="./images/feature-swipe.png" alt="Pantalla de swipe en Velaro" loading="lazy">
+    </div>
+  </article>
+
+  <!-- Feature 02 — BÚSQUEDA VISUAL -->
+  <article class="feature reverse">
+    <div class="feature-number">02<span class="sep">.</span></div>
+    <div class="feature-content">
+      <h3>Haz una foto, <em>encuentra el look</em>.</h3>
+      <p>
+        ¿La viste en Instagram, en la calle, en una serie? Sube una imagen y Velaro encuentra la prenda — o lo más parecido entre más de 40.000 referencias.
+      </p>
+      <span class="feature-tag">Búsqueda visual</span>
+    </div>
+    <div class="feature-visual">
+      <img src="./images/feature-buscar.png" alt="Búsqueda visual en Velaro" loading="lazy">
+    </div>
+  </article>
+
+  <!-- Feature 03 — CATÁLOGO -->
+  <article class="feature">
+    <div class="feature-number">03<span class="sep">.</span></div>
+    <div class="feature-content">
+      <h3>Un armario <em>infinito</em>.</h3>
+      <p>
+        Más de 60 marcas seleccionadas, más de 40.000 prendas vivas. Guarda tus favoritas, filtra por marca o precio, y compra directamente en la tienda oficial — sin intermediarios.
+      </p>
+      <span class="feature-tag">Catálogo · Favoritos</span>
+    </div>
+    <div class="feature-visual">
+      <img src="./images/feature-marcas.png" alt="+60 marcas, más de 40.000 prendas en Velaro" loading="lazy">
+    </div>
+  </article>
+</section>
+
+<!-- ==================== PULLQUOTE ==================== -->
+<section class="pullquote" id="manifiesto">
+  <blockquote>
+    <em>«Comprar ropa</em> debería sentirse como hojear una revista de moda, no como rellenar un formulario».
+  </blockquote>
+  <cite>— Manifiesto Velaro</cite>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta" id="descargar">
+  <div class="cta-inner">
+    <img src="./images/logo.png" alt="Velaro" class="cta-logo">
+    <div class="cta-eyebrow">Disponible ahora · Android</div>
+    <h2>Tu próximo <em>fondo de armario</em><br>empieza con un gesto.</h2>
+    <a href="https://play.google.com/store/apps/details?id=com.velaro.app&hl=es" class="cta-btn" target="_blank" rel="noopener">
+      <span>Descargar en Google Play</span>
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+    <p class="cta-note">Gratis · Sin anuncios invasivos</p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="./images/logo.png" alt="">
+      <span>Velaro</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="mailto:hola@velaro.app">Contacto</a>
+    </div>
+    <div>© 2026 Velaro</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.feature').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
